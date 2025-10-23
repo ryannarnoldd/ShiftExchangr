@@ -1,14 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import App from './App';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
+import App from './App';
 import Home from './pages/Home';
-import AddShift from './pages/AddShift';
-import 'bootstrap/dist/css/bootstrap.min.css'
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-
+// Define router
 const router = createBrowserRouter([
   {
     path: '/',
@@ -16,13 +17,20 @@ const router = createBrowserRouter([
     errorElement: <h1>404 - Page Not Found</h1>,
     children: [
       { index: true, element: <Home /> },
-      { path: 'add', element: <AddShift /> },
     ],
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+// Apollo Client setup
+const client = new ApolloClient({
+  uri: '/graphql', // your GraphQL endpoint
+  cache: new InMemoryCache(),
+});
+
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ApolloProvider client={client}>
+      <RouterProvider router={router} />
+    </ApolloProvider>
   </React.StrictMode>
 );

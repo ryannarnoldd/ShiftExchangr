@@ -1,63 +1,35 @@
-import Shift  from "../models/Shift.js";
+import Shift from "../models/Shift.js";
 
 const resolvers = {
-  // Query: {
+  Query: {
 
-  //   me: async (_parent: any, _args: any, context: any) => {
-      
-  //     if (context.user && context.user._id) {
-  //       const user = await User.findById(context.user._id).populate({ path: 'shifts', populate: { path: 'shifts' } }).exec();
-  //       return user;
-  //     }
-  //     throw new AuthenticationError('User! not authenticated3');
-  //   },  
-  // },
+    query_shifts: async (_parent: any, _args: any) => {
+      return Shift.find();
+    },  
+  },
 
   Mutation: {
+    // make a new collection
+    addShift: async (_parent: any, { name, location, timeDay }: { name: string; location: string; timeDay: string }, context: any) => {
 
-    addShift: async (_parent: any, { name, time, location }: { name: string, time: string; location: string}) => {
-      const shift = new Shift({
-        name,
-        time,
-        location,
-      });
+    
+      try {
+        const newShift = await Shift.create({
+          name,
+          location,
+          timeDay,
+        });
 
-      await shift.save();
-      
-      return shift;
-    }
+        // add under user.
+        await newShift.save();
     
+        return newShift;
 
-    // deleteShift: async (
-    //   _parent: any,
-    //   { collectionId, ShiftId }: { collectionId: string; ShiftId: string },
-    //   context: any
-    // ) => {
-    //   console.log('Incoming deleteShift request:', { collectionId, ShiftId });
-    
-    //   if (!context.user) {
-    //     throw new AuthenticationError('User not authenticated');
-    //   }
-    
-    //   if (!collectionId || !ShiftId) {
-    //     throw new Error('collectionId and ShiftId are required');
-    //   }
-    
-    //   const updatedCollection = await Collection.findByIdAndUpdate(
-    //     String(collectionId), // Ensure it's a string
-    //     { $pull: { Shifts: String(ShiftId) } }, // Ensure ShiftId is a string
-    //     { new: true }
-    //   );
-    
-    //   if (!updatedCollection) {
-    //     throw new Error('Collection not found');
-    //   }
-    
-    //   console.log('Updated Collection after deleteShift:', updatedCollection);
-    
-    //   return updatedCollection; // ✅ Ensure the return type matches your GraphQL schema
-    // }
-
+      } catch (error) {
+        console.error('Error creating shift:', error);
+        throw new Error('Failed to create shift');
+      }
+    },
   },
 };
 

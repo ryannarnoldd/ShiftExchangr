@@ -8,5 +8,4 @@ export interface Shift {
   postedBy: string;      // "Ryan A."
   notes?: string;        // optional free-text
   createdAt?: string;    // ISO timestamp
-  // future: day?: string; startTime?: string; endTime?: string;
 }

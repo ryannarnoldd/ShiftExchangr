@@ -1,6 +1,6 @@
 import ShiftCard from '../components/ShiftCard';
-import { Shift } from '../types/shift';
-import AddShift from './AddShift';
+import ShiftForm from '../components/ShiftForm';
+// import AddShift from './AddShift';
 
 export default function Home() {
 
@@ -43,7 +43,7 @@ const mockShifts = [
         ))}
       </div>
 
-      <AddShift />
+      <ShiftForm />
     </section>
   );
 }

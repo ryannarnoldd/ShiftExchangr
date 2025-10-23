@@ -4,21 +4,20 @@ const typeDefs = gql`
   type Shift {
     _id: ID!
     name: String!
-    time: String
-    location: Shift
+    location: String
+    timeDay: String
+    status: String
+    postedBy: String
+    notes: String
+    createdAt: String
   }
 
   type Query {
-    
+    query_shifts: [Shift]
   }
 
   type Mutation {
-    addShift(username: String!, email: String!, password: String!): Auth
-    login(email: String!, password: String!): Auth
-    createCollection(title: String!, description: String, image: String): Collection!
-    deleteCollection(collectionId: ID!): Collection!
-    deleteItem(collectionId: ID!, itemId: ID!): Collection!
-    addItem(collectionId: ID!, name: String!, description: String, price: Float): Collection!
+    addShift(name: String!, location: String, timeDay: String): Shift!
   }
 `;
 

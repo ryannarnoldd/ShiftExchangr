@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname } from 'node:path';
 import type { Request, Response } from 'express';
 import { ApolloServer, } from '@apollo/server';
+import { expressMiddleware } from '@apollo/server/express4';
 import { typeDefs, resolvers } from './schemas/index.js';
 import db from './config/connection.js';
 
@@ -34,7 +35,6 @@ const startApolloServer = async () => {
 
   app.listen(PORT, () => {
     console.log(`API server running on port ${PORT}!`);
-    console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
   });
 
 };

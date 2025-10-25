@@ -3,9 +3,10 @@ import Shift from "../models/Shift.js";
 const resolvers = {
   Query: {
 
-    query_shifts: async (_parent: any, _args: any) => {
-      return Shift.find();
-    },  
+    all_shifts: async (_parent: any, _args: any) => {
+      const shifts = await Shift.find().exec();
+      return shifts;
+    },
   },
 
   Mutation: {

@@ -1,17 +1,9 @@
 import { gql } from '@apollo/client';
 
-export const QUERY_SHIFTS = gql`
-  query query_shifts {
-    query_shifts {
-        _id
-        name
+export const ALL_SHIFTS = gql`
+  query all_shifts {
+    all_shifts {
         location
-        timeDay
-        status
-        postedBy
-        notes
-        createdAt
     }
   }
 `;
-

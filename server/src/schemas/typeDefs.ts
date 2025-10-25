@@ -13,7 +13,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    query_shifts: [Shift]
+    all_shifts: [Shift]
   }
 
   type Mutation {

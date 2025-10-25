@@ -2,7 +2,7 @@ import { Form, Button } from 'react-bootstrap';
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_SHIFT } from '../utils/mutations';
-import { QUERY_SHIFTS } from '../utils/queries';
+import { ALL_SHIFTS } from '../utils/queries';
 
 // interface ShiftFormProps {
 //   showModal: boolean;
@@ -18,7 +18,7 @@ const ShiftForm = () => {
     notes: '',
   });
 
-  const [addShift] = useMutation(ADD_SHIFT, { refetchQueries: [QUERY_SHIFTS, 'Shifts'] });
+  const [addShift] = useMutation(ADD_SHIFT, { refetchQueries: [ALL_SHIFTS, 'Shifts'] });
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>

@@ -10,7 +10,7 @@ const resolvers = {
 
   Mutation: {
     // make a new collection
-    addShift: async (_parent: any, { name, location, timeDay }: { name: string; location: string; timeDay: string }, context: any) => {
+    addShift: async (_parent: any, { name, location, timeDay }: { name: string; location: string; timeDay: string }) => {
 
     
       try {

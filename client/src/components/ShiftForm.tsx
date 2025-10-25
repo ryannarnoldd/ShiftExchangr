@@ -75,6 +75,7 @@ const ShiftForm = () => {
             <Form.Control
               type="text"
               placeholder="Example: Tuesday"
+              // default 
               name="day"
               value={formData.day}
               onChange={handleInputChange}

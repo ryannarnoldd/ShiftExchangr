@@ -4,7 +4,6 @@ import { fileURLToPath } from 'node:url';
 import { dirname } from 'node:path';
 import type { Request, Response } from 'express';
 import { ApolloServer, } from '@apollo/server';
-import { expressMiddleware } from '@apollo/server/express4';
 import { typeDefs, resolvers } from './schemas/index.js';
 import db from './config/connection.js';
 

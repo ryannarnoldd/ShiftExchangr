@@ -1,8 +1,14 @@
 import ShiftCard from '../components/ShiftCard';
 import ShiftForm from '../components/ShiftForm';
-// import AddShift from './AddShift';
+import { useQuery } from '@apollo/client';
+import { QUERY_SHIFTS } from '../utils/queries';
+import { Shift } from '../context/Shift';
 
 export default function Home() {
+  const { data, loading, error } = useQuery(QUERY_SHIFTS);
+
+  if (loading) return <p>Loading shifts...</p>;
+  if (error) return <p>Error loading shifts: {error.message}</p>;
 
 const mockShifts = [
   {
@@ -36,9 +42,9 @@ const mockShifts = [
 
   return (
     <section className="home">
-      <h2>Your Upcoming Shifts</h2>
+      <h2>Shifts</h2>
       <div className="shift-grid">
-        {mockShifts.map((shift) => (
+        {data.shifts.map((shift: Shift) => (
           <ShiftCard key={shift.id} {...shift} />
         ))}
       </div>

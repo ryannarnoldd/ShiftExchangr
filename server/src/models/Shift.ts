@@ -1,40 +1,23 @@
 import { Schema, model, type Document } from 'mongoose';
 
 interface IShift extends Document {
-    name: string;
-    location?: string;
-    timeDay?: string;
-    status?: string;
-    postedBy?: string;
+    location: string;
+    startTime: string;
+    endTime: string;
+    day: string;
+    status: string;
+    employee: string;
     notes?: string;
-    createdAt?: string;
 }
 
 const shiftSchema = new Schema<IShift>({
-    name: {
-        type: String,
-        required: true,
-        unique: true,
-    },
-    location: {
-        type: String,
-    },
-    timeDay: {
-        type: String,
-    },
-    status: {
-        type: String,
-    },
-    postedBy: {
-        type: String,
-    },
-    notes: {
-        type: String,
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    },
+    location: { type: String, required: true },
+    startTime: { type: String, required: true },
+    endTime: { type: String, required: true },
+    day: { type: String, required: true },
+    status: { type: String, required: true },
+    employee: { type: String, required: true },
+    notes: { type: String },
 });
 
 const Shift = model<IShift>('Shift', shiftSchema);

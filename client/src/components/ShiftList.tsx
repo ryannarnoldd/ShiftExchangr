@@ -1,7 +1,7 @@
 // src/components/ShiftList.tsx
 import React from 'react';
 import { Shift } from '../context/Shift';
-import ShiftCard  from './ShiftCard';
+// import {ShiftCard}  from './ShiftCard';
 
 type Props = {
   shifts: Shift[];
@@ -15,9 +15,7 @@ export const ShiftList: React.FC<Props> = ({ shifts }) => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {shifts.map((shift) => (
-            <ShiftCard {...shift} />
-        ))}
+      <h1>list</h1>
     </div>
   );
 };

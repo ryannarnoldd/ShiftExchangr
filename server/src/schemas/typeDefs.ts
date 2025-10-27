@@ -3,21 +3,21 @@ import { gql } from 'graphql-tag';
 const typeDefs = gql`
   type Shift {
     _id: ID!
-    name: String!
-    location: String
-    timeDay: String
-    status: String
-    postedBy: String
+    location: String!
+    startTime: String!
+    endTime: String!
+    day: String!
+    status: String!
+    employee: String!
     notes: String
-    createdAt: String
   }
 
   type Query {
-    all_shifts: [Shift]
+    all_shifts: [Shidft!]!
   }
 
   type Mutation {
-    addShift(name: String!, location: String, timeDay: String): Shift!
+    addShift(location: String!, startTime: String!, endTime: String!, day: String!, status: String!, employee: String!, notes: String): Shift!
   }
 `;
 

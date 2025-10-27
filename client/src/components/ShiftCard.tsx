@@ -1,17 +1,21 @@
-import { Shift } from '../context/Shift';
+import { Shift } from '../context/Shift'
 
-export default function ShiftCard(shift : Shift) {
+interface ShiftCardProps {
+  shift: Shift;
+}
+
+export const ShiftCard: React.FC<ShiftCardProps> = ({ shift }) => {
   return (
     <div className="shift-card">
-      <div className="shift-header">
-        <h3>{shift.location}</h3>
-        <span>{shift.timeDay}</span>
-        </div>
-        <div className="shift-body">
-        <p>{shift.postedBy}</p>
-        </div>
-        <div className="shift-footer">
-        </div>
-        </div>
+      <h3>{shift.day ?? `${shift.day ?? ''}`.trim()}</h3>
+      <p>
+        <strong>When:</strong>{' '}
+        {shift.startTime ? `${shift.day ?? ''} ${shift.startTime} - ${shift.endTime ?? ''}`.trim() : shift.day}
+      </p>
+      <p><strong>Location:</strong> {shift.location}</p>
+      <p><strong>Status:</strong> {shift.status}</p>
+      <p><strong>Posted by:</strong> {shift.employee ?? shift.employee}</p>
+      {shift.notes && <p><strong>Notes:</strong> {shift.notes}</p>}
+    </div>
   );
 }

@@ -13,8 +13,10 @@ const ShiftForm = () => {
   const [formData, setFormData] = useState({
     location: '',
     day: '',
-    timeRange: '',
-    status: 'giving',
+    startTime: '',
+    endTime: '',
+    employee: '',
+    status: 'giveaway',
     notes: '',
   });
 
@@ -35,14 +37,16 @@ const ShiftForm = () => {
       await addShift({
         variables: {
           location: formData.location,
+          startTime: formData.startTime,
+          endTime: formData.endTime,
           day: formData.day,
-          timeRange: formData.timeRange,
           status: formData.status,
-          notes: formData.notes,
+          employee: formData.employee || 'Unknown',
+          notes: formData.notes || null,
         },
       });
 
-      setFormData({ location: '', day: '', timeRange: '', status: 'giving', notes: '' });
+      setFormData({ location: '', day: '', startTime: '', endTime: '', employee: '', status: 'giveaway', notes: '' });
     } catch (err) {
       console.error(err);
     }
@@ -65,7 +69,6 @@ const ShiftForm = () => {
               name="location"
               value={formData.location}
               onChange={handleInputChange}
-              required
             />
           </Form.Group>
 
@@ -79,20 +82,42 @@ const ShiftForm = () => {
               name="day"
               value={formData.day}
               onChange={handleInputChange}
-              required
             />
           </Form.Group>
 
-          {/* Time Range */}
+          {/* Start Time */}
           <Form.Group className="mb-3">
-            <Form.Label>Time Range</Form.Label>
+            <Form.Label>Start Time</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Example: 12:00 PM – 6:00 PM"
-              name="timeRange"
-              value={formData.timeRange}
+              placeholder="Example: 12:00 PM"
+              name="startTime"
+              value={formData.startTime}
               onChange={handleInputChange}
-              required
+            />
+          </Form.Group>
+
+          {/* End Time */}
+          <Form.Group className="mb-3">
+            <Form.Label>End Time</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Example: 6:00 PM"
+              name="endTime"
+              value={formData.endTime}
+              onChange={handleInputChange}
+            />
+          </Form.Group>
+
+          {/* Employee / Poster */}
+          <Form.Group className="mb-3">
+            <Form.Label>Employee / Poster</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Who posted or who is assigned?"
+              name="employee"
+              value={formData.employee}
+              onChange={handleInputChange}
             />
           </Form.Group>
 
@@ -105,8 +130,9 @@ const ShiftForm = () => {
               onChange={handleInputChange}
               required
             >
-              <option value="giving">Giving Away</option>
-              <option value="picking">Picking Up</option>
+              <option value="giveaway">Giveaway</option>
+              <option value="trade">Trade</option>
+              <option value="pickup">Pickup</option>
             </Form.Select>
           </Form.Group>
 

@@ -4,29 +4,21 @@ const resolvers = {
   Query: {
 
     all_shifts: async (_parent: any, _args: any) => {
-      const shifts = await Shift.find().exec();
-      return shifts;
+      return Shift.find();
     },
   },
 
   Mutation: {
-    // make a new collection
-    addShift: async (_parent: any, { name, location, timeDay }: { name: string; location: string; timeDay: string }) => {
+    addShift: async (_parent: any, 
+      { location, startTime, endTime, day, status, employee, notes }: 
+      { location: string; startTime: string; endTime: string; day: string; status: string; employee: string; notes?: string }) => {
 
-    
       try {
-        const newShift = await Shift.create({
-          name,
-          location,
-          timeDay,
-        });
-
-        // add under user.
+        const newShift = await Shift.create({ location, startTime, endTime, day, status, employee, notes });
         await newShift.save();
-    
         return newShift;
-
-      } catch (error) {
+      } 
+      catch (error) {
         console.error('Error creating shift:', error);
         throw new Error('Failed to create shift');
       }

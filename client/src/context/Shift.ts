@@ -1,11 +1,11 @@
 export type ShiftStatus = 'giveaway' | 'trade' | 'pickup';
 
 export interface Shift {
-  id: string;            // uuid or short id
   location: string;      // e.g., "Guardians..."
-  timeDay: string;       // combined string for now "Mon 3:30 PM - 10:00 PM"
+  day: string;          // e.g., "Friday"
+  startTime: string;    // e.g., "3:30 PM"
+  endTime: string;      // e.g., "10:00 PM"
   status: ShiftStatus;
-  postedBy: string;      // "Ryan A."
+  employee: string;     // "Ryan A." (used by server)
   notes?: string;        // optional free-text
-  createdAt?: string;    // ISO timestamp
 }

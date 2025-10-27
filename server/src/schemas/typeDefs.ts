@@ -2,7 +2,6 @@ import { gql } from 'graphql-tag';
 
 const typeDefs = gql`
   type Shift {
-    _id: ID!
     location: String!
     startTime: String!
     endTime: String!
@@ -13,7 +12,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    all_shifts: [Shidft!]!
+    all_shifts: [Shift]
   }
 
   type Mutation {

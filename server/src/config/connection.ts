@@ -4,7 +4,13 @@ dotenv.config();
 import mongoose from 'mongoose';
 
 // (Localhost)
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/shiftexchangr');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://\'localhost:27017')
+.then(() => {
+    console.log('Connected to MongoDB SHIFTS');
+})
+.catch((error) => {
+    console.error('Error connecting to MongoDB:', error);
+});
 
 const db = mongoose.connection;
 

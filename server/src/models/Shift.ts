@@ -1,4 +1,5 @@
-import { Schema, model, type Document } from 'mongoose';
+import mongoose, { Schema, type Document } from 'mongoose';
+
 
 interface IShift extends Document {
     location: string;
@@ -20,7 +21,7 @@ const shiftSchema = new Schema<IShift>({
     notes: { type: String },
 });
 
-const Shift = model<IShift>('Shift', shiftSchema);
+const Shift = mongoose.model<IShift>('Shift', shiftSchema, 'shifts');
 
 export { type IShift, shiftSchema };
 

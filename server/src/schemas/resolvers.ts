@@ -1,12 +1,13 @@
 import Shift from "../models/Shift.js";
 
 const resolvers = {
-  Query: {
-
-    all_shifts: async (_parent: any, _args: any) => {
-      return Shift.find();
-    },
+Query: {
+  all_shifts: async () => {
+    const shifts = await Shift.find({});
+    console.log("Fetched shifts:", shifts);
+    return shifts;
   },
+},
 
   Mutation: {
     addShift: async (_parent: any, 

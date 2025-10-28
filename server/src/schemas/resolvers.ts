@@ -4,7 +4,6 @@ const resolvers = {
 Query: {
   all_shifts: async () => {
     const shifts = await Shift.find({});
-    console.log("Fetched shifts:", shifts);
     return shifts;
   },
 },

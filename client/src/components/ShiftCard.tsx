@@ -4,6 +4,13 @@ interface ShiftCardProps {
   shift: Shift;
 }
 
+const locationsMap: { [key: string]: string } = {
+  'GOTG': 'Guardians of the Galaxy: Cosmic Rewind',
+  'SSE': 'Spaceship Earth',
+  'MS': 'Mission Space',
+  'TT': 'Test Track'
+};
+
 export const ShiftCard: React.FC<ShiftCardProps> = ({ shift }) => {
   return (
     <div className="shift-card">
@@ -12,7 +19,7 @@ export const ShiftCard: React.FC<ShiftCardProps> = ({ shift }) => {
         <strong>When:</strong>{' '}
         {shift.startTime ? `${shift.day ?? ''} ${shift.startTime} - ${shift.endTime ?? ''}`.trim() : shift.day}
       </p>
-      <p><strong>Location:</strong> {shift.location}</p>
+      <p><strong>Location:</strong> {locationsMap[shift.location]}</p>
       <p><strong>Status:</strong> {shift.status}</p>
       <p><strong>Posted by:</strong> {shift.employee ?? shift.employee}</p>
       {shift.notes && <p><strong>Notes:</strong> {shift.notes}</p>}

@@ -91,7 +91,6 @@ export default function FilterBar({ filters, setFilters }: FilterBarProps) {
       <ShiftFormModal
         isOpen={showModal}
         onClose={() => setShowModal(false)}
-        onSubmit={() => {}}
       />
     </div>
   );

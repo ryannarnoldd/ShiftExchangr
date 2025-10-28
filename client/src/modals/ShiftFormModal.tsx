@@ -3,88 +3,109 @@ import { useState } from "react";
 import { BaseModal } from "./BaseModal";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { useMutation } from "@apollo/client";
+import { ADD_SHIFT } from "../utils/mutations";
 
 type ShiftFormModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (shift: {
-    location: string;
-    day: string;
-    startTime: string;
-    endTime: string;
-  }) => void;
 };
 
-export const ShiftFormModal = ({
-  isOpen,
-  onClose,
-  onSubmit,
-}: ShiftFormModalProps) => {
-  const [location, setLocation] = useState("");
-  const [day, setDay] = useState("");
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
+const locationOptions = ["GOTG", "SSE", "MS", "TT"];
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+export const ShiftFormModal = ({ isOpen, onClose }: ShiftFormModalProps) => {
+  const [formData, setFormData] = useState({
+    location: "",
+    day: "",
+    startTime: "",
+    endTime: "",
+    employee: "",
+    notes: "",
+  });
 
-    if (!location || !day || !startTime || !endTime) {
-      alert("Please fill out all fields.");
-      return;
-    }
+  const [addShift, { loading }] = useMutation(ADD_SHIFT);
 
-    if (startTime >= endTime) {
-      alert("Start time must be before end time.");
-      return;
-    }
-
-    onSubmit({ location, day, startTime, endTime });
-    onClose();
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
-  const handleClear = () => {
-    setLocation("");
-    setDay("");
-    setStartTime("");
-    setEndTime("");
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      await addShift({
+        variables: {
+          location: formData.location,
+          day: formData.day,
+          startTime: formData.startTime,
+          endTime: formData.endTime,
+          status: "giving",
+          employee: formData.employee || "Unknown",
+          notes: formData.notes || null,
+        },
+      });
+
+      console.log("Shift added:", formData);
+      onClose(); // ✅ close modal on success
+      setFormData({
+        location: "",
+        day: "",
+        startTime: "",
+        endTime: "",
+        employee: "",
+        notes: "",
+      });
+    } catch (err) {
+      console.error("Error adding shift:", err);
+    }
   };
 
   return (
     <BaseModal title="Post a Shift" isOpen={isOpen} onClose={onClose}>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleFormSubmit}>
+        {/* Location */}
         <Form.Group controlId="location" className="mb-3">
           <Form.Label>Location</Form.Label>
-            <Form.Control
-                as="select"
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-            >
-              <option value="">Select Location</option>
-              <option value="GOTG">GOTG</option>
-              <option value="SSE">SSE</option>
-              <option value="MS">Mission Space</option>
-              <option value="TT">Test Track</option>
-            </Form.Control>
-
-
+          <Form.Select
+            name="location"
+            value={formData.location}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select Location</option>
+            {locationOptions.map((loc) => (
+              <option key={loc} value={loc}>
+                {loc}
+              </option>
+            ))}
+          </Form.Select>
         </Form.Group>
 
+        {/* Day */}
         <Form.Group controlId="day" className="mb-3">
           <Form.Label>Day</Form.Label>
           <Form.Control
             type="date"
-            value={day}
-            onChange={(e) => setDay(e.target.value)}
+            name="day"
+            value={formData.day}
+            onChange={handleChange}
+            required
           />
         </Form.Group>
 
+        {/* Time Range */}
         <div className="d-flex gap-2">
           <Form.Group controlId="startTime" className="flex-fill mb-3">
             <Form.Label>Start Time</Form.Label>
             <Form.Control
               type="time"
-              value={startTime}
-              onChange={(e) => setStartTime(e.target.value)}
+              name="startTime"
+              value={formData.startTime}
+              onChange={handleChange}
+              required
             />
           </Form.Group>
 
@@ -92,21 +113,47 @@ export const ShiftFormModal = ({
             <Form.Label>End Time</Form.Label>
             <Form.Control
               type="time"
-              value={endTime}
-              onChange={(e) => setEndTime(e.target.value)}
+              name="endTime"
+              step="900"
+              value={formData.endTime}
+              onChange={handleChange}
+              required
             />
           </Form.Group>
         </div>
 
+        {/* Employee */}
+        <Form.Group controlId="employee" className="mb-3">
+          <Form.Label>Employee Name</Form.Label>
+          <Form.Control
+            type="text"
+            name="employee"
+            placeholder="Optional"
+            value={formData.employee}
+            onChange={handleChange}
+          />
+        </Form.Group>
+
+        {/* Notes */}
+        <Form.Group controlId="notes" className="mb-3">
+          <Form.Label>Notes</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={2}
+            name="notes"
+            placeholder="Optional notes..."
+            value={formData.notes}
+            onChange={handleChange}
+          />
+        </Form.Group>
+
+        {/* Buttons */}
         <div className="d-flex justify-content-end gap-2 mt-3">
-          <Button variant="secondary" onClick={handleClear}>
-            Clear
-          </Button>
           <Button variant="outline-dark" onClick={onClose}>
             Cancel
           </Button>
-          <Button type="submit" variant="primary">
-            Submit Shift
+          <Button type="submit" variant="primary" disabled={loading}>
+            {loading ? "Submitting..." : "Submit Shift"}
           </Button>
         </div>
       </Form>

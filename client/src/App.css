@@ -7,15 +7,17 @@
 
 html, body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background-color: #f9f9fb;
+  background: #f4f5f7;
   color: #1a1a1a;
   line-height: 1.6;
   min-height: 100%;
+  scroll-behavior: smooth;
 }
 
 a {
   text-decoration: none;
   color: inherit;
+  transition: color 0.2s ease;
 }
 
 button, input, textarea {
@@ -23,6 +25,7 @@ button, input, textarea {
   font-size: 1rem;
   border: none;
   outline: none;
+  transition: all 0.2s ease;
 }
 
 ul {
@@ -39,7 +42,7 @@ ul {
 /* === NAVBAR === */
 .navbar {
   background: #ffffff;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e0e0e0;
   padding: 1rem 4%;
   display: flex;
   justify-content: space-between;
@@ -47,73 +50,78 @@ ul {
   position: sticky;
   top: 0;
   z-index: 100;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
 }
 
 .logo {
-  font-weight: 600;
-  font-size: 1.25rem;
+  font-weight: 700;
+  font-size: 1.5rem;
   color: #0e1116;
   letter-spacing: -0.5px;
 }
 
 .nav-links {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.8rem;
 }
 
 .nav-links a {
   color: #555;
-  transition: color 0.2s ease;
   font-weight: 500;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
 }
 
 .nav-links a:hover,
 .nav-links a.active {
-  color: #111;
+  color: #0b0c10;
+  background: #f0f1f5;
 }
 
 /* === HOME PAGE === */
 .home h2 {
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
-  font-weight: 600;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  text-align: center;
+  color: #111;
 }
 
 .shift-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.8rem;
+  margin-top: 1rem;
 }
 
 /* === SHIFT CARD === */
 .shift-card {
-  background: #fff;
-  border: 1px solid #e8e8e8;
-  border-radius: 14px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-  transition: all 0.25s ease;
+  background: linear-gradient(145deg, #ffffff, #fefefe);
+  border-radius: 16px;
+  padding: 1.8rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
 .shift-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
-  border-color: #ddd;
+  transform: translateY(-6px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
 }
 
 .shift-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
 }
 
 .shift-header h3 {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 600;
+  color: #111;
 }
 
 .shift-header p {
@@ -127,44 +135,48 @@ ul {
 
 .shift-body p {
   font-size: 0.95rem;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.4rem;
+  color: #333;
 }
 
 .notes {
   font-size: 0.9rem;
   color: #555;
-  background: #f7f7f7;
-  border-radius: 6px;
-  padding: 0.5rem;
-  margin-top: 0.4rem;
+  background: #f5f6f8;
+  border-radius: 8px;
+  padding: 0.6rem;
+  margin-top: 0.6rem;
+  line-height: 1.4;
 }
 
 .edit-btn {
   align-self: flex-start;
   margin-top: 1rem;
   font-size: 0.9rem;
-  padding: 0.4rem 0.8rem;
-  background: #eef1f4;
-  border-radius: 6px;
-  transition: background 0.2s ease;
+  padding: 0.5rem 1rem;
+  background: #eef2ff;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
 }
 
 .edit-btn:hover {
-  background: #e0e4ea;
+  background: #d7e0ff;
+  transform: translateY(-2px);
 }
 
 /* === FORM STYLES === */
 .shift-form {
-  background: #fff;
+  background: #ffffff;
   padding: 2rem;
-  border-radius: 14px;
-  border: 1px solid #eaeaea;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+  border-radius: 16px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.04);
   max-width: 600px;
-  margin: 1.5rem auto;
+  margin: 2rem auto;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.2rem;
 }
 
 .shift-form label {
@@ -175,61 +187,86 @@ ul {
 }
 
 .shift-form input,
-.shift-form textarea {
-  margin-top: 0.4rem;
-  padding: 0.65rem 0.75rem;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  transition: border 0.2s ease;
+.shift-form textarea,
+.shift-form select {
+  margin-top: 0.5rem;
+  padding: 0.65rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid #d6d6d6;
+  background: #fafafa;
 }
 
 .shift-form input:focus,
-.shift-form textarea:focus {
-  border-color: #7c9fff;
-  background: #f9fbff;
+.shift-form textarea:focus,
+.shift-form select:focus {
+  border-color: #6c8cff;
+  background: #f0f4ff;
 }
 
 .shift-form textarea {
-  min-height: 80px;
+  min-height: 100px;
   resize: vertical;
 }
 
 .shift-form button {
   align-self: flex-end;
-  background: #111;
+  background: #4a64f0;
   color: #fff;
-  font-weight: 500;
-  border-radius: 8px;
-  padding: 0.6rem 1.25rem;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 0.7rem 1.4rem;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.1s ease;
+  transition: background 0.3s ease, transform 0.1s ease;
 }
 
 .shift-form button:hover {
-  background: #333;
-  transform: translateY(-1px);
+  background: #364ecf;
+  transform: translateY(-2px);
 }
 
 /* === PAGE TITLES === */
 section h2 {
-  font-weight: 600;
-  margin-bottom: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
   color: #111;
   text-align: center;
 }
 
 /* === RESPONSIVE === */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  .shift-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
   .nav-links {
     gap: 1rem;
     font-size: 0.95rem;
   }
 
   .app-container {
-    padding: 1.25rem;
+    padding: 1.5rem;
   }
 
   .shift-form {
-    padding: 1.25rem;
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .shift-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .shift-card {
+    padding: 1.4rem;
+  }
+
+  .shift-form {
+    padding: 1.2rem;
+  }
+
+  .shift-form button {
+    width: 100%;
   }
 }

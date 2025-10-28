@@ -1,7 +1,7 @@
-// src/components/ShiftList.tsx
 import React from "react";
 import { Shift } from "../context/Shift";
 import { ShiftCard } from "./ShiftCard";
+import { Container, Row, Col } from "react-bootstrap";
 
 type ShiftListProps = {
   shifts: Shift[];
@@ -18,7 +18,6 @@ export const ShiftList: React.FC<ShiftListProps> = ({ shifts, filters }: ShiftLi
 
   // ✅ Apply filters if provided
   const filteredShifts = shifts.filter((shift) => {
-    console.log('Applying filters:', filters);
     const matchesLocation =
       !filters?.location ||
       shift.location.toLowerCase().includes(filters.location.toLowerCase());
@@ -38,17 +37,21 @@ export const ShiftList: React.FC<ShiftListProps> = ({ shifts, filters }: ShiftLi
 
   if (!filteredShifts.length) {
     return (
-      <p className="text-center text-gray-500 mt-4">
+      <p className="text-center text-muted mt-4">
         No shifts match your filters.
       </p>
     );
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
-      {filteredShifts.map((shift) => (
-        <ShiftCard shift={shift} />
-      ))}
-    </div>
+    <Container fluid className="mt-3">
+      <Row className="g-4">
+        {filteredShifts.map((shift) => (
+          <Col key={shift?.day} xs={12} sm={6} lg={4}>
+            <ShiftCard shift={shift} />
+          </Col>
+        ))}
+      </Row>
+    </Container>
   );
 };

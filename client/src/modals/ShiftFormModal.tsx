@@ -6,7 +6,6 @@ import Button from "react-bootstrap/Button";
 import { useMutation } from "@apollo/client";
 import { ADD_SHIFT } from "../utils/mutations";
 import type { Filter } from "../context/Filter";
-import { set } from "mongoose";
 
 
 type ShiftFormModalProps = {
@@ -68,14 +67,7 @@ export const ShiftFormModal = ({ isOpen, onClose, filter }: ShiftFormModalProps)
 
             console.log("Shift added:", formData);
             onClose(); // ✅ close modal on success
-            setFormData({
-                location: "",
-                day: "",
-                startTime: "",
-                endTime: "",
-                employee: "",
-                notes: "",
-            });
+            window.location.reload(); // ✅ reload to show new shift
         } catch (err) {
             console.error("Error adding shift:", err);
         }

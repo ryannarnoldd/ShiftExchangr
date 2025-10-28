@@ -7,7 +7,7 @@
 
 html, body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background: #f4f5f7;
+  background: #f0f2f7;
   color: #1a1a1a;
   line-height: 1.6;
   min-height: 100%;
@@ -20,7 +20,7 @@ a {
   transition: color 0.2s ease;
 }
 
-button, input, textarea {
+button, input, textarea, select {
   font-family: inherit;
   font-size: 1rem;
   border: none;
@@ -34,13 +34,18 @@ ul {
 
 /* === LAYOUT === */
 .app-container {
-  padding: 2rem 4%;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 2rem 4%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 /* === NAVBAR === */
 .navbar {
+  width: 100%;
   background: #ffffff;
   border-bottom: 1px solid #e0e0e0;
   padding: 1rem 4%;
@@ -63,13 +68,15 @@ ul {
 .nav-links {
   display: flex;
   gap: 1.8rem;
+  flex-wrap: wrap;
 }
 
 .nav-links a {
   color: #555;
   font-weight: 500;
-  padding: 0.25rem 0.5rem;
-  border-radius: 6px;
+  padding: 0.35rem 0.7rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
 }
 
 .nav-links a:hover,
@@ -78,20 +85,47 @@ ul {
   background: #f0f1f5;
 }
 
-/* === HOME PAGE === */
-.home h2 {
-  font-size: 2rem;
+/* === FILTER BAR === */
+.filter-bar {
+  display: flex;
+  gap: 1rem;
   margin-bottom: 2rem;
-  font-weight: 700;
-  text-align: center;
-  color: #111;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
 }
 
+.filter-bar input,
+.filter-bar select {
+  padding: 0.6rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid #d6d6d6;
+  background: #fff;
+  min-width: 150px;
+}
+
+.filter-bar input:focus,
+.filter-bar select:focus {
+  border-color: #4a64f0;
+  box-shadow: 0 0 0 2px rgba(74, 100, 240, 0.2);
+}
+
+/* === PAGE TITLES === */
+section h2 {
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: #111;
+  text-align: center;
+}
+
+/* === SHIFT GRID === */
 .shift-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.8rem;
-  margin-top: 1rem;
+  gap: 2rem;
+  width: 100%;
+  justify-items: center;
+  margin-bottom: 4rem;
 }
 
 /* === SHIFT CARD === */
@@ -99,16 +133,18 @@ ul {
   background: linear-gradient(145deg, #ffffff, #fefefe);
   border-radius: 16px;
   padding: 1.8rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 100%;
+  max-width: 320px;
 }
 
 .shift-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  transform: translateY(-8px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.1);
 }
 
 .shift-header {
@@ -119,7 +155,7 @@ ul {
 }
 
 .shift-header h3 {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 600;
   color: #111;
 }
@@ -135,7 +171,7 @@ ul {
 
 .shift-body p {
   font-size: 0.95rem;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.5rem;
   color: #333;
 }
 
@@ -143,26 +179,31 @@ ul {
   font-size: 0.9rem;
   color: #555;
   background: #f5f6f8;
-  border-radius: 8px;
-  padding: 0.6rem;
+  border-radius: 10px;
+  padding: 0.7rem;
   margin-top: 0.6rem;
   line-height: 1.4;
 }
 
-.edit-btn {
-  align-self: flex-start;
-  margin-top: 1rem;
-  font-size: 0.9rem;
-  padding: 0.5rem 1rem;
-  background: #eef2ff;
-  border-radius: 8px;
-  font-weight: 500;
-  cursor: pointer;
+/* === STATUS TAG === */
+.shift-status {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 6px;
+  text-transform: uppercase;
 }
 
-.edit-btn:hover {
-  background: #d7e0ff;
-  transform: translateY(-2px);
+.status-open {
+  background-color: #d4f8d4;
+  color: #2a7f2a;
+}
+
+.status-closed {
+  background-color: #f8d4d4;
+  color: #7f2a2a;
 }
 
 /* === FORM STYLES === */
@@ -171,7 +212,7 @@ ul {
   padding: 2rem;
   border-radius: 16px;
   border: 1px solid #e0e0e0;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
   max-width: 600px;
   margin: 2rem auto;
   display: flex;
@@ -199,7 +240,7 @@ ul {
 .shift-form input:focus,
 .shift-form textarea:focus,
 .shift-form select:focus {
-  border-color: #6c8cff;
+  border-color: #4a64f0;
   background: #f0f4ff;
 }
 
@@ -224,18 +265,21 @@ ul {
   transform: translateY(-2px);
 }
 
-/* === PAGE TITLES === */
-section h2 {
-  font-weight: 700;
-  margin-bottom: 2rem;
-  color: #111;
-  text-align: center;
+/* === RESPONSIVE === */
+@media (max-width: 992px) {
+  .shift-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
 }
 
-/* === RESPONSIVE === */
 @media (max-width: 768px) {
+  .filter-bar {
+    flex-direction: column;
+    align-items: center;
+  }
+
   .shift-grid {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: 1fr;
     gap: 1.5rem;
   }
 
@@ -247,26 +291,18 @@ section h2 {
   .app-container {
     padding: 1.5rem;
   }
-
-  .shift-form {
-    padding: 1.5rem;
-  }
 }
 
 @media (max-width: 480px) {
-  .shift-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .shift-card {
-    padding: 1.4rem;
-  }
-
   .shift-form {
-    padding: 1.2rem;
+    padding: 1.5rem;
   }
 
   .shift-form button {
     width: 100%;
+  }
+
+  .shift-card {
+    padding: 1.5rem;
   }
 }

@@ -12,16 +12,24 @@ const locationsMap: { [key: string]: string } = {
 };
 
 export const ShiftCard: React.FC<ShiftCardProps> = ({ shift }) => {
+  const statusClass = shift.status?.toLowerCase() === 'open' ? 'status-open' : 'status-closed';
+
   return (
     <div className="shift-card">
-      <h3>{shift.day ?? `${shift.day ?? ''}`.trim()}</h3>
+      <h3>{'GIVING'}</h3>
       <p>
         <strong>When:</strong>{' '}
-        {shift.startTime ? `${shift.day ?? ''} ${shift.startTime} - ${shift.endTime ?? ''}`.trim() : shift.day}
+        {shift.startTime ? `${shift.startTime} - ${shift.endTime ?? ''}` : 'TBD'}
+      </p>
+      <p>
+        <strong>Day:</strong> {shift.day}
       </p>
       <p><strong>Location:</strong> {locationsMap[shift.location]}</p>
-      <p><strong>Status:</strong> {shift.status}</p>
-      <p><strong>Posted by:</strong> {shift.employee ?? shift.employee}</p>
+      <p>
+        <strong>Status:</strong>{' '}
+        <span className={`shift-status ${statusClass}`}>{shift.status}</span>
+      </p>
+      <p><strong>Posted by:</strong> {shift.employee ?? 'Unknown'}</p>
       {shift.notes && <p><strong>Notes:</strong> {shift.notes}</p>}
     </div>
   );

@@ -1,6 +1,7 @@
 export type ShiftStatus = 'giveaway' | 'trade' | 'pickup';
 
 export interface Shift {
+  _id?: string;        // Shift unique identifier
   location: string;      // e.g., "Guardians..."
   day: string;          // e.g., "Friday"
   startTime: string;    // e.g., "3:30 PM"

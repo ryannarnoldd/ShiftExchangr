@@ -23,6 +23,20 @@ Query: {
         throw new Error('Failed to create shift');
       }
     },
+    delShift: async (_parent: any, { shiftId }: { shiftId: string }) => {
+      try {
+        console.log('this in resolver', shiftId);
+        const deletedShift = await Shift.findByIdAndDelete(shiftId);
+        if (!deletedShift) {
+          throw new Error('Shift not found');
+        }
+        return deletedShift;
+      }
+      catch (error) {
+        console.error('Error deleting shift:', error);
+        throw new Error('Failed to delete shift');
+      }
+    },
   },
 };
 

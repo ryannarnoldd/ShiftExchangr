@@ -47,7 +47,7 @@ export const ShiftList: React.FC<ShiftListProps> = ({ shifts, filters }: ShiftLi
     <Container fluid className="mt-3">
       <Row className="g-4">
         {filteredShifts.map((shift) => (
-          <Col key={shift?.day} xs={12} sm={6} lg={4}>
+          <Col key={shift._id} xs={12} sm={6} lg={4}>
             <ShiftCard shift={shift} />
           </Col>
         ))}

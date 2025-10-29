@@ -136,6 +136,7 @@ section h2 {
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   display: flex;
+  border: 3px solid black;
   flex-direction: column;
   justify-content: space-between;
   min-height: 220px;
@@ -153,7 +154,7 @@ section h2 {
   top: 10px;
   right: 12px;
   background: transparent;
-  color: #888;
+  color:red;
   font-size: 1.2rem;
   cursor: pointer;
   border-radius: 6px;
@@ -194,8 +195,8 @@ section h2 {
 
 .shift-time-range {
   font-size: 1.25rem;
-  font-weight: 600;
-  color: #111;
+  font-weight: 800;
+  color: #000e57ff;
 }
 
 .shift-separator {
@@ -206,7 +207,25 @@ section h2 {
 .shift-location {
   margin-top: 0.3rem;
   font-size: 0.95rem;
-  color: #4a4a4a;
+  color: #00400cff;
+}
+
+/* make a different color for location */
+/* now each .shift-location will have a class based on location */
+.shift-location.gotg {
+  color: #d22f0bff;
+}
+
+.shift-location.sse {
+  color: #28a745;
+}
+
+.shift-location.ms {
+  color: #ab8100ff;
+}
+
+.shift-location.tt {
+  color: #09899dff;
 }
 
 /* === FOOTER === */

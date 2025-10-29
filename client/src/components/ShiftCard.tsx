@@ -50,7 +50,7 @@ export const ShiftCard: React.FC<ShiftCardProps> = ({ shift }) => {
   return (
     <div className="shift-card">
       {/* Delete Button */}
-      <button className="delete-btn" onClick={handleDeleteShift}>
+      <button className="delete-btn red" onClick={handleDeleteShift}>
         ×
       </button>
 
@@ -75,7 +75,8 @@ export const ShiftCard: React.FC<ShiftCardProps> = ({ shift }) => {
             <span className="shift-tbd">Time TBD</span>
           )}
         </div>
-        <div className="shift-location">
+        {/* add the location to className */}
+        <div className={`shift-location ${shift.location.toLowerCase()}`}>
           {locationsMap[shift.location] ?? shift.location}
         </div>
       </div>

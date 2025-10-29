@@ -7,13 +7,14 @@
 
 html, body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background: #f0f2f7;
+  background: #eef1f7;
   color: #1a1a1a;
   line-height: 1.6;
   min-height: 100%;
   scroll-behavior: smooth;
 }
 
+/* === BASE ELEMENTS === */
 a {
   text-decoration: none;
   color: inherit;
@@ -34,19 +35,18 @@ ul {
 
 /* === LAYOUT === */
 .app-container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 2rem 4%;
+  padding: 2rem 3%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
 }
 
 /* === NAVBAR === */
 .navbar {
   width: 100%;
-  background: #ffffff;
+  background: #fff;
   border-bottom: 1px solid #e0e0e0;
   padding: 1rem 4%;
   display: flex;
@@ -67,14 +67,14 @@ ul {
 
 .nav-links {
   display: flex;
-  gap: 1.8rem;
+  gap: 1.6rem;
   flex-wrap: wrap;
 }
 
 .nav-links a {
   color: #555;
   font-weight: 500;
-  padding: 0.35rem 0.7rem;
+  padding: 0.4rem 0.8rem;
   border-radius: 8px;
   transition: all 0.2s ease;
 }
@@ -89,7 +89,7 @@ ul {
 .filter-bar {
   display: flex;
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 2.2rem;
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
@@ -110,7 +110,7 @@ ul {
   box-shadow: 0 0 0 2px rgba(74, 100, 240, 0.2);
 }
 
-/* === PAGE TITLES === */
+/* === TITLES === */
 section h2 {
   font-weight: 700;
   margin-bottom: 2rem;
@@ -121,92 +121,116 @@ section h2 {
 /* === SHIFT GRID === */
 .shift-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.4rem;
   width: 100%;
-  justify-items: center;
   margin-bottom: 4rem;
+  align-items: start;
 }
 
 /* === SHIFT CARD === */
 .shift-card {
-  background: linear-gradient(145deg, #ffffff, #fefefe);
-  border-radius: 16px;
-  padding: 1.8rem;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 1.5rem 1.6rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 100%;
-  max-width: 320px;
+  min-height: 220px;
+  position: relative;
 }
 
 .shift-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.1);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.08);
 }
 
-.shift-header {
+/* === DELETE BUTTON === */
+.delete-btn {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: transparent;
+  color: #888;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 0.2rem 0.5rem;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.delete-btn:hover {
+  background: #f2f2f2;
+  color: #222;
+}
+
+/* === HEADER === */
+.shift-card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
-.shift-header h3 {
-  font-size: 1.3rem;
+.shift-date {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #222;
+}
+
+.shift-day {
+  font-size: 0.85rem;
+  color: #777;
+  letter-spacing: 0.5px;
+}
+
+/* === TIME RANGE === */
+.shift-time-section {
+  text-align: center;
+  margin: 0.8rem 0 1rem;
+}
+
+.shift-time-range {
+  font-size: 1.25rem;
   font-weight: 600;
   color: #111;
 }
 
-.shift-header p {
-  font-size: 0.9rem;
-  color: #666;
+.shift-separator {
+  margin: 0 0.4rem;
+  color: #999;
 }
 
-.shift-body {
-  flex: 1;
-}
-
-.shift-body p {
+.shift-location {
+  margin-top: 0.3rem;
   font-size: 0.95rem;
-  margin-bottom: 0.5rem;
+  color: #4a4a4a;
+}
+
+/* === FOOTER === */
+.shift-footer {
+  font-size: 0.95rem;
   color: #333;
+  background: #fafbfc;
+  padding: 0.9rem;
+  border-radius: 10px;
+  line-height: 1.5;
 }
 
-.notes {
-  font-size: 0.9rem;
-  color: #555;
-  background: #f5f6f8;
-  border-radius: 10px;
-  padding: 0.7rem;
-  margin-top: 0.6rem;
-  line-height: 1.4;
-}
-
-/* === STATUS TAG === */
-.shift-status {
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 10px;
-  font-size: 0.85rem;
+.shift-footer strong {
+  color: #111;
   font-weight: 600;
-  margin-top: 6px;
-  text-transform: uppercase;
 }
 
-.status-open {
-  background-color: #d4f8d4;
-  color: #2a7f2a;
+.shift-notes {
+  margin-top: 0.4rem;
+  font-style: italic;
+  color: #555;
 }
 
-.status-closed {
-  background-color: #f8d4d4;
-  color: #7f2a2a;
-}
-
-/* === FORM STYLES === */
+/* === FORM === */
 .shift-form {
   background: #ffffff;
   padding: 2rem;
@@ -244,11 +268,6 @@ section h2 {
   background: #f0f4ff;
 }
 
-.shift-form textarea {
-  min-height: 100px;
-  resize: vertical;
-}
-
 .shift-form button {
   align-self: flex-end;
   background: #4a64f0;
@@ -266,9 +285,10 @@ section h2 {
 }
 
 /* === RESPONSIVE === */
-@media (max-width: 992px) {
+@media (max-width: 1024px) {
   .shift-grid {
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.2rem;
   }
 }
 
@@ -280,12 +300,7 @@ section h2 {
 
   .shift-grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  .nav-links {
-    gap: 1rem;
-    font-size: 0.95rem;
+    gap: 1.2rem;
   }
 
   .app-container {
@@ -294,15 +309,11 @@ section h2 {
 }
 
 @media (max-width: 480px) {
-  .shift-form {
-    padding: 1.5rem;
+  .shift-card {
+    padding: 1.2rem;
   }
 
   .shift-form button {
     width: 100%;
-  }
-
-  .shift-card {
-    padding: 1.5rem;
   }
 }

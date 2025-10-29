@@ -1,6 +1,7 @@
 import { useMutation } from "@apollo/client";
 import { DELETE_SHIFT } from "../utils/mutations";
 import { Shift } from "../context/Shift";
+import { format } from "date-fns";
 
 interface ShiftCardProps {
   shift: Shift;
@@ -9,7 +10,7 @@ interface ShiftCardProps {
 const locationsMap: Record<string, string> = {
   GOTG: "Guardians of the Galaxy: Cosmic Rewind",
   SSE: "Spaceship Earth",
-  MS: "Mission Space",
+  MS: "Mission: Space",
   TT: "Test Track",
 };
 
@@ -34,44 +35,59 @@ export const ShiftCard: React.FC<ShiftCardProps> = ({ shift }) => {
     }
   };
 
-  const statusClass =
-    shift.status?.toLowerCase() === "open" ? "status-open" : "status-closed";
+  // Format readable date
+  const formattedDate = shift.day
+    ? format(new Date(shift.day), "MMM d, yyyy")
+    : "No date";
+
+  const dayOfWeek = shift.day
+    ? format(new Date(shift.day), "EEEE")
+    : "";
+
+  const startTime = shift.startTime || "";
+  const endTime = shift.endTime || "";
 
   return (
-    <div className={`shift-card ${statusClass}`}>
+    <div className="shift-card">
       {/* Delete Button */}
       <button className="delete-btn" onClick={handleDeleteShift}>
         ×
       </button>
 
-      {/* Header: Day & Time */}
-      <div className="shift-header">
-        <h3>{shift.day}</h3>
-        <p className="shift-time">
-          {shift.startTime
-            ? `${shift.startTime} - ${shift.endTime ?? ""}`
-            : "TBD"}
-        </p>
+      {/* Top Row: Date and Day */}
+      <div className="shift-card-header">
+        <div>
+          <div className="shift-date">{formattedDate}</div>
+          <div className="shift-day">{dayOfWeek.toUpperCase()}</div>
+        </div>
       </div>
 
-      {/* Body: Labels + Info */}
-      <div className="shift-body">
-        <p>
-          <strong>Location:</strong>{" "}
-          <span className="shift-location">
-            {locationsMap[shift.location] ?? shift.location}
-          </span>
-        </p>
+      {/* Center Time Range */}
+      <div className="shift-time-section">
+        <div className="shift-time-range">
+          {startTime && endTime ? (
+            <>
+              <span className="shift-start">{startTime}</span>
+              <span className="shift-separator">–</span>
+              <span className="shift-end">{endTime}</span>
+            </>
+          ) : (
+            <span className="shift-tbd">Time TBD</span>
+          )}
+        </div>
+        <div className="shift-location">
+          {locationsMap[shift.location] ?? shift.location}
+        </div>
+      </div>
 
-        <p>
-          <strong>Employee:</strong>{" "}
-          <span className="shift-employee">{shift.employee ?? "Unknown"}</span>
+      {/* Footer: Employee + Notes */}
+      <div className="shift-footer">
+        <p className="shift-employee">
+          <strong>{shift.employee ?? "Unknown"}</strong>
         </p>
-
         {shift.notes && (
-          <p>
-            <strong>Notes:</strong>{" "}
-            <span className="shift-notes">{shift.notes}</span>
+          <p className="shift-notes">
+            <em>{shift.notes}</em>
           </p>
         )}
       </div>

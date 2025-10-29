@@ -10,11 +10,11 @@ Query: {
 
   Mutation: {
     addShift: async (_parent: any, 
-      { location, startTime, endTime, day, status, employee, notes }: 
-      { location: string; startTime: string; endTime: string; day: string; status: string; employee: string; notes?: string }) => {
+      { location, startTime, endTime, day, status, perner, employee, notes }: 
+      { location: string; startTime: string; endTime: string; day: string; status: string; perner: string; employee: string; notes?: string }) => {
 
       try {
-        const newShift = await Shift.create({ location, startTime, endTime, day, status, employee, notes });
+        const newShift = await Shift.create({ location, startTime, endTime, day, status, employee, notes, perner });
         await newShift.save();
         return newShift;
       } 

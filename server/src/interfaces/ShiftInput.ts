@@ -4,6 +4,7 @@ export default interface IShiftInput {
     endTime: string;
     day: string;
     status: string;
+    perner: string;
     employee: string;
     notes?: string;
 }

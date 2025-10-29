@@ -8,7 +8,8 @@ const typeDefs = gql`
     endTime: String!
     day: String!
     status: String!
-    employee: String!
+    perner: String!
+    employee: String
     notes: String
   }
 
@@ -17,7 +18,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addShift(location: String!, startTime: String!, endTime: String!, day: String!, status: String!, employee: String!, notes: String): Shift!
+    addShift(location: String!, startTime: String!, endTime: String!, day: String!, status: String!, perner: String!, employee: String!, notes: String): Shift!
     delShift(shiftId: ID!): Shift!
   }
 `;

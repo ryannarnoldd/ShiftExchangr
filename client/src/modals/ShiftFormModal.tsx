@@ -25,6 +25,7 @@ export const ShiftFormModal = ({ isOpen, onClose, filter }: ShiftFormModalProps)
                 day: filter.day || "",
                 startTime: filter.startTime || "",
                 endTime: filter.endTime || "",
+                perner: "",
                 employee: "",
                 notes: "",
             });
@@ -36,6 +37,7 @@ export const ShiftFormModal = ({ isOpen, onClose, filter }: ShiftFormModalProps)
         day: filter.day || "",
         startTime: filter.startTime || "",
         endTime: filter.endTime || "",
+        perner: "",
         employee: "",
         notes: "",
     });
@@ -60,6 +62,7 @@ export const ShiftFormModal = ({ isOpen, onClose, filter }: ShiftFormModalProps)
                     startTime: formData.startTime,
                     endTime: formData.endTime,
                     status: "giving",
+                    perner: formData.perner,
                     employee: formData.employee || "Unknown",
                     notes: formData.notes || null,
                 },
@@ -131,6 +134,18 @@ export const ShiftFormModal = ({ isOpen, onClose, filter }: ShiftFormModalProps)
                         />
                     </Form.Group>
                 </div>
+
+                <Form.Group controlId="perner" className="mb-3">
+                    <Form.Label>Perner Name</Form.Label>
+                    <Form.Control
+                        type="text"
+                        name="perner"
+                        placeholder="PERNER"
+                        value={formData.perner}
+                        onChange={handleChange}
+                        required
+                    />
+                </Form.Group>
 
                 {/* Employee */}
                 <Form.Group controlId="employee" className="mb-3">

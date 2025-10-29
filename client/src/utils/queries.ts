@@ -9,6 +9,7 @@ export const ALL_SHIFTS = gql`
       endTime
       day
       status
+      perner
       employee
       notes
     }

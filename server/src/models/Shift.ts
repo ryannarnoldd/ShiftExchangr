@@ -7,6 +7,7 @@ interface IShift extends Document {
     endTime: string;
     day: string;
     status: string;
+    perner: string;
     employee: string;
     notes?: string;
 }
@@ -17,6 +18,7 @@ const shiftSchema = new Schema<IShift>({
     endTime: { type: String, required: true },
     day: { type: String, required: true },
     status: { type: String, required: true },
+    perner: { type: String, required: true },
     employee: { type: String, required: true },
     notes: { type: String },
 });

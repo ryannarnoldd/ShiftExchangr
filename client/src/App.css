@@ -336,3 +336,22 @@ section h2 {
     width: 100%;
   }
 }
+
+
+.time-toggle-btn {
+  background: none;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 4px 10px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.time-toggle-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.time-toggle-btn:active {
+  background-color: #e0e0e0;
+}

@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import { useMutation } from "@apollo/client";
 import { ADD_SHIFT } from "../utils/mutations";
 import type { Filter } from "../context/Filter";
-import { generateTimeOptions } from "../utils/utils";
+import { formatTime, generateTimeOptions } from "../utils/utils";
 import { locationOptions } from "../context/Shift";
 
 const timeOptions = generateTimeOptions();
@@ -137,7 +137,7 @@ export const ShiftFormModal = ({ isOpen, onClose, filter }: ShiftFormModalProps)
               <option value="">Select start</option>
               {timeOptions.map((t) => (
                 <option key={t} value={t}>
-                  {t}
+                  {formatTime(t)}
                 </option>
               ))}
             </Form.Select>
@@ -155,7 +155,7 @@ export const ShiftFormModal = ({ isOpen, onClose, filter }: ShiftFormModalProps)
                 .filter((t) => !formData.startTime || t > formData.startTime)
                 .map((t) => (
                   <option key={t} value={t}>
-                    {t}
+                    {formatTime(t)}
                   </option>
                 ))}
             </Form.Select>

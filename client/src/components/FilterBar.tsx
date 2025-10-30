@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { ShiftFormModal } from "../modals/ShiftFormModal";
 import type { Filter } from "../context/Filter";
 import { Form, Row, Col, Button } from "react-bootstrap";
-import { generateTimeOptions } from "../utils/utils";
+import { formatTime, generateTimeOptions } from "../utils/utils";
 
 interface FilterBarProps {
   filters: Filter;
@@ -125,7 +125,7 @@ export default function FilterBar({ filters, setFilters }: FilterBarProps) {
                 <option value="">Select Start Time</option>
                 {filteredStartTimes.map((time: string) => (
                   <option key={time} value={time}>
-                    {time}
+                    {formatTime(time)}
                   </option>
                 ))}
               </Form.Select>
@@ -153,7 +153,7 @@ export default function FilterBar({ filters, setFilters }: FilterBarProps) {
                 <option value="">Select End Time</option>
                 {filteredEndTimes.map((time: string) => (
                   <option key={time} value={time}>
-                    {time}
+                    {formatTime(time)}
                   </option>
                 ))}
               </Form.Select>

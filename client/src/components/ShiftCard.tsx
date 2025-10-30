@@ -2,6 +2,7 @@ import { useMutation } from "@apollo/client";
 import { DELETE_SHIFT } from "../utils/mutations";
 import { Shift } from "../context/Shift";
 import { format } from "date-fns";
+import { formatTime } from "../utils/utils";
 
 interface ShiftCardProps {
   shift: Shift;
@@ -44,8 +45,8 @@ export const ShiftCard: React.FC<ShiftCardProps> = ({ shift }) => {
     ? format(new Date(shift.day), "EEEE")
     : "";
 
-  const startTime = shift.startTime || "";
-  const endTime = shift.endTime || "";
+  const startTime = formatTime(shift.startTime || "");
+  const endTime = formatTime(shift.endTime || "");
 
   return (
     <div className="shift-card">
@@ -82,7 +83,7 @@ export const ShiftCard: React.FC<ShiftCardProps> = ({ shift }) => {
               ) : (
                 <>
                   <span className="shift-start">{startTime}</span>
-                  <span className="shift-separator">–</span>
+                  <span className="shift-separator">to</span>
                   <span className="shift-end">{endTime}</span>
                 </>
               )}

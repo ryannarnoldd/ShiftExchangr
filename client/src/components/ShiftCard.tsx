@@ -64,17 +64,45 @@ export const ShiftCard: React.FC<ShiftCardProps> = ({ shift }) => {
 
       {/* Center Time Range */}
       <div className="shift-time-section">
+
+        {/* shift status here. */}
+        <h4>{shift.status === 'giving' ? 'Giving' : shift.status === 'looking' ? 'Picking Up' : 'Trading'}</h4>
+
+
         <div className="shift-time-range">
-          {startTime && endTime ? (
+          {shift.status === "looking" ? (
+            // Picking up
             <>
-              <span className="shift-start">{startTime}</span>
-              <span className="shift-separator">–</span>
-              <span className="shift-end">{endTime}</span>
+              {startTime === "00:00" && endTime === "23:45" ? (
+                <span className="shift-tbd">Time TBD</span>
+              ) : startTime === "00:00" ? (
+                <span className="shift-end">Out before {endTime}</span>
+              ) : endTime === "23:45" ? (
+                <span className="shift-start">Start after {startTime}</span>
+              ) : (
+                <>
+                  <span className="shift-start">{startTime}</span>
+                  <span className="shift-separator">–</span>
+                  <span className="shift-end">{endTime}</span>
+                </>
+              )}
             </>
           ) : (
-            <span className="shift-tbd">Time TBD</span>
+            // Giving or trading
+            <>
+              {startTime === "00:00" && endTime === "23:45" ? (
+                <span className="shift-tbd">Time TBD</span>
+              ) : (
+                <>
+                  <span className="shift-start">{startTime}</span>
+                  <span className="shift-separator">–</span>
+                  <span className="shift-end">{endTime}</span>
+                </>
+              )}
+            </>
           )}
         </div>
+
         {/* add the location to className */}
         <div className={`shift-location ${shift.location.toLowerCase()}`}>
           {locationsMap[shift.location] ?? shift.location}
@@ -86,11 +114,9 @@ export const ShiftCard: React.FC<ShiftCardProps> = ({ shift }) => {
         <p className="shift-employee">
           <strong>{shift.employee ?? "Unknown"}</strong>
         </p>
-        {shift.notes && (
-          <p className="shift-notes">
-            <em>{shift.notes}</em>
-          </p>
-        )}
+        <p className="shift-notes">
+          <em>{shift.notes || "This Cast Member has no preferences."}</em>
+        </p>
       </div>
     </div>
   );

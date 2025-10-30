@@ -24,6 +24,7 @@ export const ShiftFormModal = ({ isOpen, onClose, filter }: ShiftFormModalProps)
     day: filter.day || "",
     startTime: filter.startTime || "",
     endTime: filter.endTime || "",
+    status: "giving",
     perner: "",
     employee: "",
     notes: "",
@@ -34,8 +35,9 @@ export const ShiftFormModal = ({ isOpen, onClose, filter }: ShiftFormModalProps)
       setFormData({
         location: filter.location || "",
         day: filter.day || "",
-        startTime: filter.startTime || "",
-        endTime: filter.endTime || "",
+        startTime: filter.startTime || "00:00",
+        endTime: filter.endTime || "23:45", 
+        status: "giving",
         perner: "",
         employee: "",
         notes: "",
@@ -60,9 +62,9 @@ export const ShiftFormModal = ({ isOpen, onClose, filter }: ShiftFormModalProps)
           day: formData.day,
           startTime: formData.startTime,
           endTime: formData.endTime,
-          status: "giving",
+          status: formData.status,
           perner: formData.perner,
-          employee: formData.employee || "Unknown",
+          employee: formData.employee || "Anonymous",
           notes: formData.notes || null,
         },
       });
@@ -78,6 +80,21 @@ export const ShiftFormModal = ({ isOpen, onClose, filter }: ShiftFormModalProps)
   return (
     <BaseModal title="Post a Shift" isOpen={isOpen} onClose={onClose}>
       <Form onSubmit={handleFormSubmit} className="shift-form">
+        <Form.Group controlId="status">
+          <Form.Label>Shift Type</Form.Label>
+          <Form.Select
+            name="status"
+            value={formData.status}
+            onChange={handleChange}
+            required
+          >
+            <option value="giving">Giving</option>
+            <option value="looking">Picking Up</option>
+          </Form.Select>
+        </Form.Group>
+
+
+
         {/* Location */}
         <Form.Group controlId="location">
           <Form.Label>Location</Form.Label>
@@ -116,7 +133,6 @@ export const ShiftFormModal = ({ isOpen, onClose, filter }: ShiftFormModalProps)
               name="startTime"
               value={formData.startTime}
               onChange={handleChange}
-              required
             >
               <option value="">Select start</option>
               {timeOptions.map((t) => (
@@ -133,7 +149,6 @@ export const ShiftFormModal = ({ isOpen, onClose, filter }: ShiftFormModalProps)
               name="endTime"
               value={formData.endTime}
               onChange={handleChange}
-              required
             >
               <option value="">Select end</option>
               {timeOptions

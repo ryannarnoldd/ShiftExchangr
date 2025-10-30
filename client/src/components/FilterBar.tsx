@@ -48,6 +48,25 @@ export default function FilterBar({ filters, setFilters }: FilterBarProps) {
       <Form>
         <Row className="align-items-end g-3">
 
+          {/* Shift Status */}
+          {/* Make it smaller */}
+          <Col xs={6} sm={1} md={2}>
+            <Form.Group controlId="filterStatus">
+              <Form.Label>Shift Status</Form.Label>
+              <Form.Select
+                value={localFilters.status || ""}
+                onChange={(e) =>
+                  setLocalFilters({ ...localFilters, status: e.target.value })
+                }
+              >
+                <option value="">All Shifts</option>
+                <option value="giving">Giving</option>
+                <option value="looking">Picking Up</option>
+                {/* <option value="trading">Trading</option> */}
+              </Form.Select>
+            </Form.Group>
+          </Col>
+
           {/* Location */}
           <Col xs={12} sm={6} md={3}>
             <Form.Group controlId="filterLocation">
@@ -86,7 +105,7 @@ export default function FilterBar({ filters, setFilters }: FilterBarProps) {
           </Col>
 
           {/* Start Time */}
-          <Col xs={12} sm={6} md={3}>
+          <Col xs={12} sm={6} md={2}>
             <Form.Group controlId="filterStartTime">
               <Form.Label>Start Time</Form.Label>
               <Form.Select
@@ -114,7 +133,7 @@ export default function FilterBar({ filters, setFilters }: FilterBarProps) {
           </Col>
 
           {/* End Time */}
-          <Col xs={12} sm={6} md={3}>
+          <Col xs={12} sm={6} md={2}>
             <Form.Group controlId="filterEndTime">
               <Form.Label>End Time</Form.Label>
               <Form.Select

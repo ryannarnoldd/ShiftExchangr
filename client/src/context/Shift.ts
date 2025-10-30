@@ -1,7 +1,5 @@
-export type ShiftStatus = 'giveaway' | 'trade' | 'pickup';
+export type ShiftStatus = 'giving' | 'looking' | 'trading';
 
-// export const locationOptions = ["GOTG" | "SSE" | "MS" | "TT"];
-// Do this so i can import it as a value.
 export const locationOptions = ["GOTG", "SSE", "MS", "TT"];
 
 export interface Shift {

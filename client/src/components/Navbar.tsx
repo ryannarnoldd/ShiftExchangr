@@ -5,7 +5,7 @@ export default function Navbar() {
 
   return (
     <nav className="navbar">
-      <h1 className="logo">ShiftExchangr</h1>
+      <h1 className="logo">Shift Exchangr</h1>
       <ul className="nav-links">
         <li><Link className={pathname === '/' ? 'active' : ''} to="/">Home</Link></li>
       </ul>

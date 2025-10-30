@@ -6,6 +6,7 @@ import { Container, Row, Col } from "react-bootstrap";
 type ShiftListProps = {
   shifts: Shift[];
   filters: {
+    status?: string;
     location?: string;
     day?: string;
     startTime?: string;
@@ -16,7 +17,8 @@ type ShiftListProps = {
 export const ShiftList: React.FC<ShiftListProps> = ({ shifts, filters }) => {
   const filteredAndSorted = shifts
     // ✅ Filter all at once
-    .filter(({ location, day, startTime, endTime }) =>
+    .filter(({ status, location, day, startTime, endTime }) =>
+      (!filters.status || status.toLowerCase() === filters.status.toLowerCase()) &&
       (!filters.location || location.toLowerCase().includes(filters.location.toLowerCase())) &&
       (!filters.day || day.toLowerCase() === filters.day.toLowerCase()) &&
       (!filters.startTime || startTime >= filters.startTime) &&

@@ -35,8 +35,8 @@ export const ShiftFormModal = ({ isOpen, onClose, filter }: ShiftFormModalProps)
       setFormData({
         location: filter.location || "",
         day: filter.day || "",
-        startTime: filter.startTime || "00:00",
-        endTime: filter.endTime || "23:45", 
+        startTime: filter.startTime || "",
+        endTime: filter.endTime || "",
         status: "giving",
         perner: "",
         employee: "",

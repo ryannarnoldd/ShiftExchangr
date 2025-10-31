@@ -5,7 +5,7 @@ import FilterBar from "../components/FilterBar";
 import type { Filter } from "../context/Filter";
 import { ShiftList } from "../components/ShiftList";
 
-export default function Home() {
+export default function Home( ) {
   const { data, loading, error } = useQuery(ALL_SHIFTS);
 
   const [filters, setFilters] = useState<Filter>({

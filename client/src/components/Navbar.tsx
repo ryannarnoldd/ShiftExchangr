@@ -15,6 +15,7 @@ export default function Navbar() {
       localStorage.setItem("timeFormat", next ? "24" : "12");
       return next;
     });
+    window.location.reload();
   };
 
   return (

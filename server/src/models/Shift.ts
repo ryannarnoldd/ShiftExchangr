@@ -3,8 +3,8 @@ import mongoose, { Schema, type Document } from 'mongoose';
 
 interface IShift extends Document {
     location: string;
-    startTime: string;
-    endTime: string;
+    startTime?: string;
+    endTime?: string;
     day: string;
     status: string;
     perner: string;
@@ -14,8 +14,8 @@ interface IShift extends Document {
 
 const shiftSchema = new Schema<IShift>({
     location: { type: String, required: true },
-    startTime: { type: String, required: true },
-    endTime: { type: String, required: true },
+    startTime: { type: String},
+    endTime: { type: String},
     day: { type: String, required: true },
     status: { type: String, required: true },
     perner: { type: String, required: true },

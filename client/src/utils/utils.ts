@@ -21,3 +21,10 @@ export const formatTime = (time: string): string => {
   hour = hour % 12 || 12;
   return `${hour}:${minute} ${ampm}`;
 }
+
+export const locationNames : { [key: string]: string } = {
+  "GOTG": "Guardians of the Galaxy",
+  "SSE": "Spaceship Earth",
+  "MS": "Mission: Space",
+  "TT": "Test Track"
+};

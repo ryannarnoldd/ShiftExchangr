@@ -6,7 +6,7 @@ import { useMutation } from "@apollo/client";
 import { ADD_SHIFT } from "../utils/mutations";
 import type { Filter } from "../context/Filter";
 import { formatTime, generateTimeOptions } from "../utils/utils";
-import { locationOptions } from "../context/Shift";
+import { locationNames } from "../utils/utils";
 
 const timeOptions = generateTimeOptions();
 
@@ -44,6 +44,8 @@ export const ShiftFormModal = ({ isOpen, onClose, filter }: ShiftFormModalProps)
       });
     }
   }, [isOpen]);
+
+
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -105,9 +107,12 @@ export const ShiftFormModal = ({ isOpen, onClose, filter }: ShiftFormModalProps)
             required
           >
             <option value="">Select Location</option>
-            {locationOptions.map((loc) => (
-              <option key={loc} value={loc}>
-                {loc}
+
+            {/* Loop throug hte dict locationames.
+            The key is the value. the value is going to be what the users sees. */}
+            {Object.entries(locationNames).map(([key, name]) => (
+              <option key={key} value={key}>
+                {name}
               </option>
             ))}
           </Form.Select>
@@ -132,6 +137,11 @@ export const ShiftFormModal = ({ isOpen, onClose, filter }: ShiftFormModalProps)
             <Form.Select
               name="startTime"
               value={formData.startTime}
+              // Make required only if status in the form above is 'giving'.
+              {  ...(formData.status === 'giving' ? { required: true } : {}) }
+              
+
+
               onChange={handleChange}
             >
               <option value="">Select start</option>
@@ -148,6 +158,7 @@ export const ShiftFormModal = ({ isOpen, onClose, filter }: ShiftFormModalProps)
             <Form.Select
               name="endTime"
               value={formData.endTime}
+              {  ...(formData.status === 'giving' ? { required: true } : {}) }
               onChange={handleChange}
             >
               <option value="">Select end</option>

@@ -4,8 +4,8 @@ const typeDefs = gql`
   type Shift {
     _id: ID!
     location: String!
-    startTime: String!
-    endTime: String!
+    startTime: String
+    endTime: String
     day: String!
     status: String!
     perner: String!

@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const ADD_SHIFT = gql`
-  mutation addShift($location: String!, $startTime: String!, $endTime: String!, $day: String!, $status: String!, $employee: String!, $notes: String, $perner: String!) {
+  mutation addShift($location: String!, $startTime: String, $endTime: String, $day: String!, $status: String!, $employee: String!, $notes: String, $perner: String!) {
     addShift(location: $location, startTime: $startTime, endTime: $endTime, day: $day, status: $status, employee: $employee, notes: $notes, perner: $perner) {
       _id
       location
